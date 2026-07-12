@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pour Toi ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #2a0815 0%, #1a050f 100%);
+            color: #fce4ec;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Effet de particules (petites lumières en fond) */
+        .background-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 182, 193, 0.3);
+            border-radius: 50%;
+            animation: float infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        /* Section Accueil */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-style: italic;
+            color: #ffb6c1;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 15px rgba(255, 182, 193, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            animation: bounce 2s infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        /* Galerie de photos */
+        .gallery {
+            position: relative;
+            z-index: 1;
+            padding: 50px 0 150px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 150px; /* Espace important pour obliger à scroller */
+        }
+
+        .photo-wrapper {
+            position: relative;
+            width: 90%;
+            max-width: 450px;
+            opacity: 0;
+            transform: translateY(150px) scale(0.9);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Différents angles pour un effet naturel */
+        .photo-wrapper:nth-child(odd) {
+            transform: translateY(150px) scale(0.9) rotate(-8deg);
+        }
+        
+        .photo-wrapper:nth-child(even) {
+            transform: translateY(150px) scale(0.9) rotate(8deg);
+        }
+
+        /* Classes actives ajoutées par JS */
+        .photo-wrapper.visible:nth-child(odd) {
+            opacity: 1;
+            transform: translateY(0) scale(1) rotate(-3deg);
+        }
+
+        .photo-wrapper.visible:nth-child(even) {
+            opacity: 1;
+            transform: translateY(0) scale(1) rotate(3deg);
+        }
+
+        .photo-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 182, 193, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+            /* Transition fluide si elle survole l'image */
+            transition: transform 0.4s ease;
+        }
+
+        .photo-card img:hover {
+            transform: scale(1.03);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Arrière-plan animé -->
+    <div class="background-particles" id="particles"></div>
+
+    <!-- Écran d'accueil -->
+    <section class="hero">
+        <h1>Toi & Moi</h1>
+        <p>Prends le temps de défiler</p>
+        <div class="scroll-indicator">↓</div>
+    </section>
+
+    <!-- Galerie de photos (8 photos) -->
+    <section class="gallery">
+        
+        <div class="photo-wrapper">
+            <div class="photo-card">
+                <img src="img/selfi-miroir.jpg" alt="Nous">
+            </div>
+        </div>
+
+        <div class="photo-wrapper">
+            <div class="photo-card">
+                <img src="img/selfi-miroir-piknik.jpg" alt="Nous">
+            </div>
+        </div>
+
+        <div class="photo-wrapper">
+            <div class="photo-card">
+                <img src="img/selfi-miroir-1er-date.jpg" alt="Nous">
+            </div>
+        </div>
+
+        <div class="photo-wrapper">
+            <div class="photo-card">
+                <img src="img/selfi-bus.jpg" alt="Nous">
+            </div>
+        </div>
+
+        <div class="photo-wrapper">
+            <div class="photo-card">
+                <img src="img/hamac-a2.jpg" alt="Nous">
+            </div>
+        </div>
+
+        <div class="photo-wrapper">
+            <div class="photo-card">
+                <img src="img/manege-a2.jpg" alt="Nous">
+            </div>
+        </div>
+
+        <div class="photo-wrapper">
+            <div class="photo-card">
+                <img src="img/lina-mousse.jpg" alt="Nous">
+            </div>
+        </div>
+
+        <div class="photo-wrapper">
+            <div class="photo-card">
+                <img src="img/lina-looksmaxing.jpg" alt="Nous">
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        // Génération des particules en arrière-plan
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+
+        for (let i = 0; i < particleCount; i++) {
+            let particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Propriétés aléatoires pour un effet naturel
+            let size = Math.random() * 8 + 2; // Taille entre 2px et 10px
+            let left = Math.random() * 100; // Position horizontale
+            let duration = Math.random() * 10 + 10; // Durée entre 10s et 20s
+            let delay = Math.random() * 10; // Délai de départ
+
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${left}vw`;
+            particle.style.animationDuration = `${duration}s`;
+            particle.style.animationDelay = `${delay}s`;
+
+            particlesContainer.appendChild(particle);
+        }
+
+        // Animation au défilement (Intersection Observer)
+        const photos = document.querySelectorAll('.photo-wrapper');
+        
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3 // Déclenche quand 30% de la photo est visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Optionnel : arrêter d'observer une fois l'animation jouée
+                    // observer.unobserve(entry.target); 
+                } else {
+                    // Retire la classe si on remonte pour rejouer l'animation
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, observerOptions);
+
+        photos.forEach(photo => {
+            observer.observe(photo);
+        });
+    </script>
+</body>
+</html>
